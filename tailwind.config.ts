@@ -23,8 +23,8 @@ const config: Config = {
         gold: "#C8A96E",
       },
       fontFamily: {
-        display: ["'Horizon'", "var(--font-playfair)", "serif"],
-        heading: ["'Horizon'", "var(--font-cormorant)", "serif"],
+        display: ["var(--font-cormorant)", "Georgia", "serif"],
+        heading: ["var(--font-cormorant)", "Georgia", "serif"],
         body: ["var(--font-dm-sans)", "sans-serif"],
       },
       maxWidth: {
