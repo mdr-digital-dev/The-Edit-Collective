@@ -10,21 +10,21 @@ const config: Config = {
     extend: {
       colors: {
         cream: {
-          DEFAULT: "#F5F0E8",
-          dark: "#EDE7D8",
+          DEFAULT: "#FFF9E9",
+          dark: "#F5EDD0",
         },
         royal: {
-          DEFAULT: "#1C3A7A",
-          deep: "#132A5E",
-          light: "#2B4FA0",
+          DEFAULT: "#0857B4",
+          deep: "#064499",
+          light: "#2970CC",
         },
         charcoal: "#1A1A1A",
         "warm-white": "#FDFBF7",
         gold: "#C8A96E",
       },
       fontFamily: {
-        display: ["var(--font-playfair)", "serif"],
-        heading: ["var(--font-cormorant)", "serif"],
+        display: ["'Horizon'", "var(--font-playfair)", "serif"],
+        heading: ["'Horizon'", "var(--font-cormorant)", "serif"],
         body: ["var(--font-dm-sans)", "sans-serif"],
       },
       maxWidth: {

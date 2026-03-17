@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import AnimatedFadeUp from "@/components/ui/AnimatedFadeUp";
 
@@ -11,7 +12,7 @@ export default function Hero() {
         <div className="bg-cream flex items-center px-8 md:px-16 py-24">
           <AnimatedFadeUp>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-charcoal leading-tight">
-              Where Strategy Becomes Identity.
+              The Edit Your Brand Has Been Waiting For.
             </h1>
             <p className="font-body text-lg text-charcoal/70 mt-6 max-w-lg">
               The Edit Collective is a boutique digital agency for brands that
@@ -29,11 +30,16 @@ export default function Hero() {
           </AnimatedFadeUp>
         </div>
 
-        {/* Right side */}
-        <div className="bg-cream-dark hidden lg:flex items-center justify-center min-h-[600px]">
-          <div className="font-heading text-xl text-charcoal/20">
-            Editorial Image
-          </div>
+        {/* Right side — editorial image */}
+        <div className="hidden lg:block relative min-h-[600px]">
+          <Image
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=900&fit=crop&q=80"
+            alt="The Edit Collective — boutique digital agency"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-royal/20" />
         </div>
       </div>
     </section>

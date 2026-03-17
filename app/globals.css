@@ -1,16 +1,19 @@
+@import url('https://fonts.cdnfonts.com/css/horizon');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --cream: #F5F0E8;
-  --cream-dark: #EDE7D8;
-  --royal-blue: #1C3A7A;
-  --royal-deep: #132A5E;
-  --royal-light: #2B4FA0;
+  --cream: #FFF9E9;
+  --cream-dark: #F5EDD0;
+  --royal-blue: #0857B4;
+  --royal-deep: #064499;
+  --royal-light: #2970CC;
   --charcoal: #1A1A1A;
   --warm-white: #FDFBF7;
   --gold-accent: #C8A96E;
+  --font-horizon: 'Horizon', sans-serif;
 }
 
 html {
