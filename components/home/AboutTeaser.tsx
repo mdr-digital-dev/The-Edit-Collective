@@ -25,7 +25,7 @@ export default function AboutTeaser() {
 
       {/* Right — About copy */}
       <div className="bg-cream p-12 md:p-16 flex flex-col justify-center">
-        <p className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-6">
+        <p className="font-body text-xs tracking-[0.3em] uppercase text-charcoal/40 mb-6">
           Who We Are
         </p>
         <h2 className="font-display italic font-semibold text-3xl md:text-4xl text-charcoal mb-6">
