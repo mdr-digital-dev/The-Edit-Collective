@@ -37,8 +37,8 @@
     .stagger-6 { transition-delay: 0.3s; }
 
     /* ── Nav ── */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; background: transparent; transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s, padding 0.3s; }
-    nav.scrolled { background: rgba(244, 240, 230, 0.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 2px 24px rgba(0,0,0,0.06); padding: 20px 64px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; background: rgba(244,240,230,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s, padding 0.3s; }
+    nav.scrolled { background: rgba(244, 240, 230, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); padding: 20px 64px; }
     .logo { font-family: var(--font-headline); font-size: 28px; color: var(--color-dark); }
     .nav-links { display: flex; align-items: center; gap: 48px; }
     .nav-links a { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--color-dark); transition: opacity 0.3s; }
@@ -57,22 +57,22 @@
     .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--color-dark); margin: 6px 0; transition: transform 0.3s, opacity 0.3s; }
 
     /* ── Hero ── */
-    .hero { position: relative; min-height: 100vh; background: linear-gradient(160deg, var(--color-dark) 0%, var(--color-dark-deep) 100%); overflow: hidden; display: flex; align-items: center; padding: 140px 64px 80px; }
+    .hero { position: relative; min-height: 100vh; background: var(--color-cream); overflow: hidden; display: flex; align-items: center; padding: 140px 64px 80px; }
     .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; pointer-events: none; }
-    .hero-orb-1 { width: 500px; height: 500px; background: var(--color-taupe); top: -120px; right: -80px; }
-    .hero-orb-2 { width: 350px; height: 350px; background: var(--color-sage); bottom: -60px; left: 10%; }
-    .hero-orb-3 { width: 200px; height: 200px; background: var(--color-sand); top: 40%; left: 50%; }
+    .hero-orb-1 { width: 500px; height: 500px; background: rgba(192,177,155,0.08); top: -120px; right: -80px; }
+    .hero-orb-2 { width: 350px; height: 350px; background: rgba(178,193,196,0.06); bottom: -60px; left: 10%; }
+    .hero-orb-3 { width: 200px; height: 200px; background: rgba(192,177,155,0.05); top: 40%; left: 50%; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1280px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
     .hero-content .eyebrow { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 24px; }
-    .hero-content h1 { font-family: var(--font-headline); font-size: clamp(40px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: var(--color-white); margin-bottom: 24px; }
+    .hero-content h1 { font-family: var(--font-headline); font-size: clamp(40px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: var(--color-dark); margin-bottom: 24px; }
     .hero-content h1 em { font-style: italic; color: var(--color-taupe); }
-    .hero-content .subtitle { font-size: 18px; font-weight: 300; color: var(--color-sand); max-width: 480px; line-height: 1.7; margin-bottom: 48px; }
+    .hero-content .subtitle { font-size: 18px; font-weight: 300; color: var(--color-dark); opacity: 0.7; max-width: 480px; line-height: 1.7; margin-bottom: 48px; }
     .hero-stats { display: flex; gap: 48px; }
-    .hero-stat-value { font-family: var(--font-headline); font-size: 36px; color: var(--color-white); line-height: 1; margin-bottom: 6px; }
+    .hero-stat-value { font-family: var(--font-headline); font-size: 36px; color: var(--color-dark); line-height: 1; margin-bottom: 6px; }
     .hero-stat-label { font-family: var(--font-ui); font-size: 13px; font-weight: 400; color: var(--color-sage-muted); letter-spacing: 0.5px; }
     .hero-visual { display: flex; align-items: center; justify-content: center; }
-    .hero-placeholder { width: 100%; aspect-ratio: 4/3; border-radius: 20px; background: rgba(255,255,255,0.06); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
-    .hero-placeholder svg { width: 64px; height: 64px; color: rgba(255,255,255,0.15); }
+    .hero-placeholder { width: 100%; aspect-ratio: 4/3; border-radius: 20px; background: var(--color-sand); border: 1px solid rgba(192,177,155,0.3); display: flex; align-items: center; justify-content: center; }
+    .hero-placeholder svg { width: 64px; height: 64px; color: rgba(192,177,155,0.3); }
 
     /* ── What's Included ── */
     .includes-section { background: var(--color-cream); padding: 100px 64px; }
@@ -319,7 +319,7 @@
     <div class="pricing-grid">
       <div class="pricing-card glass fade-up stagger-1">
         <span class="card-name">Social Shoot</span>
-        <div class="card-price">Custom</div>
+        <div class="card-price">$499</div>
         <div class="card-context">half-day session</div>
         <div class="card-divider"></div>
         <ul class="card-features">
@@ -333,7 +333,7 @@
       <div class="pricing-card featured fade-up stagger-2">
         <div class="popular-badge">Most Popular</div>
         <span class="card-name">Professional</span>
-        <div class="card-price">Custom</div>
+        <div class="card-price">$799</div>
         <div class="card-context">half-day session</div>
         <div class="card-divider"></div>
         <ul class="card-features">
@@ -346,7 +346,7 @@
       </div>
       <div class="pricing-card glass fade-up stagger-3">
         <span class="card-name">Full Production</span>
-        <div class="card-price">Custom</div>
+        <div class="card-price">$1,199</div>
         <div class="card-context">full-day session</div>
         <div class="card-divider"></div>
         <ul class="card-features">

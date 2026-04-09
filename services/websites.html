@@ -52,6 +52,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: rgba(244, 240, 230, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
             transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
         }
 
@@ -59,13 +63,13 @@
             background: rgba(244, 240, 230, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 1px 24px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
         }
 
         .nav-logo {
             font-family: var(--font-headline);
             font-size: 28px;
-            color: var(--color-white);
+            color: var(--color-dark);
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -85,7 +89,7 @@
             font-family: var(--font-ui);
             font-size: 15px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--color-dark);
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -95,7 +99,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--color-white);
+            color: var(--color-taupe);
         }
 
         .nav.scrolled .nav-links a:hover {
@@ -103,8 +107,8 @@
         }
 
         .nav-links .contact-pill {
-            background: var(--color-white);
-            color: var(--color-dark) !important;
+            background: var(--color-dark);
+            color: var(--color-white) !important;
             padding: 10px 24px;
             border-radius: 100px;
             font-weight: 600;
@@ -203,7 +207,7 @@
             display: block;
             width: 24px;
             height: 2px;
-            background: var(--color-white);
+            background: var(--color-dark);
             border-radius: 2px;
             transition: background 0.3s, transform 0.3s;
         }
@@ -264,7 +268,7 @@
 
         /* ──────────── HERO ──────────── */
         .hero {
-            background: linear-gradient(135deg, #33333a 0%, #4a4a52 50%, #1a1a1f 100%);
+            background: var(--color-cream);
             padding: 160px 48px 100px;
             position: relative;
             overflow: hidden;
@@ -280,7 +284,7 @@
         .hero-orb-1 {
             width: 500px;
             height: 500px;
-            background: rgba(192, 177, 155, 0.12);
+            background: rgba(192, 177, 155, 0.08);
             top: -120px;
             right: -100px;
         }
@@ -288,7 +292,7 @@
         .hero-orb-2 {
             width: 360px;
             height: 360px;
-            background: rgba(178, 193, 196, 0.1);
+            background: rgba(178, 193, 196, 0.06);
             bottom: -80px;
             left: -60px;
         }
@@ -317,7 +321,7 @@
             font-family: var(--font-headline);
             font-size: 56px;
             line-height: 1.1;
-            color: var(--color-white);
+            color: var(--color-dark);
             margin-bottom: 20px;
         }
 
@@ -330,7 +334,8 @@
             font-size: 18px;
             font-weight: 300;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.65);
+            color: var(--color-dark);
+            opacity: 0.7;
             margin-bottom: 40px;
             max-width: 480px;
         }
@@ -344,30 +349,29 @@
             font-family: var(--font-ui);
             font-size: 32px;
             font-weight: 700;
-            color: var(--color-white);
+            color: var(--color-dark);
         }
 
         .hero-stat-label {
             font-family: var(--font-ui);
             font-size: 13px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--color-taupe);
             margin-top: 4px;
         }
 
         .hero-mockup {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: var(--color-sand);
+            border: 1px solid rgba(192, 177, 155, 0.3);
             border-radius: 20px;
             min-height: 360px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(192, 177, 155, 0.3);
             font-family: var(--font-ui);
             font-size: 15px;
             font-weight: 500;
-            backdrop-filter: blur(8px);
         }
 
         /* ──────────── WHAT'S INCLUDED ──────────── */
@@ -1317,7 +1321,7 @@
                 <div class="pricing-badge">Most Popular</div>
                 <div class="pricing-name">Growth</div>
                 <div class="pricing-price">$1,199</div>
-                <div class="pricing-period">starting at + $150&ndash;250/mo</div>
+                <div class="pricing-period">starting at + $150&ndash;350/mo</div>
                 <p class="pricing-desc">For growing businesses that need a multi-page site built for conversion and scale.</p>
                 <ul class="pricing-features">
                     <li>
