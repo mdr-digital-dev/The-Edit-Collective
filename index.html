@@ -28,7 +28,8 @@
       --glass-border: rgba(255,255,255,0.12);
     }
 
-    body { font-family: var(--font-body); color: var(--color-dark); background: var(--color-cream); -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+    body { font-family: var(--font-body); color: var(--color-dark); background: var(--color-cream); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -58,8 +59,8 @@
 
     /* ── Hero ──────────────────────────────────────────── */
     .hero { min-height: auto; background: var(--color-cream); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 230px 64px 125px; position: relative; overflow: hidden; }
-    .hero-gradient-orb { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(192,177,155,0.18) 0%, transparent 70%); top: -250px; right: -150px; pointer-events: none; }
-    .hero-gradient-orb-2 { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(178,193,196,0.12) 0%, transparent 70%); bottom: -150px; left: -100px; pointer-events: none; }
+    .hero-gradient-orb { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(192,177,155,0.18) 0%, transparent 70%); top: -250px; right: -150px; pointer-events: none; will-change: transform; transform: translateZ(0); }
+    .hero-gradient-orb-2 { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(178,193,196,0.12) 0%, transparent 70%); bottom: -150px; left: -100px; pointer-events: none; will-change: transform; transform: translateZ(0); }
     .hero-content { display: flex; flex-direction: column; gap: 48px; width: 100%; position: relative; z-index: 2; }
     .hero h1 { font-family: var(--font-headline); font-size: clamp(56px, 7.5vw, 100px); font-weight: 400; line-height: 1.0; color: var(--color-dark); width: 100%; max-width: 1400px; }
     .hero h1 .line-1 { display: block; }
@@ -117,7 +118,7 @@
     .result-card { background: var(--color-white); border-radius: 16px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
     .result-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(51,51,58,0.12); }
     .result-image { width: 100%; height: 200px; background: var(--color-sage); display: flex; align-items: center; justify-content: center; }
-    .result-image::after { content: 'Coming Soon'; font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-white); opacity: 0.5; }
+    .result-image::after { display: none; }
     .result-stat { font-family: var(--font-ui); font-size: 42px; font-weight: 700; color: var(--color-dark); padding: 24px 24px 4px; }
     .result-context { font-size: 16px; font-weight: 300; color: var(--color-dark); padding: 0 24px; }
     .result-client { font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--color-taupe); padding: 16px 24px 28px; }
@@ -216,7 +217,7 @@
           <a href="/services/apps">App Development <span>iOS & Android</span></a>
         </div>
       </div>
-      <a href="#results">Work</a>
+      <a href="#results">Our Edits</a>
       <a href="/blog">Blog</a>
       <a href="/contact" class="nav-cta">Contact</a>
     </div>
@@ -370,13 +371,13 @@
           <div class="result-client">produceworldil.com</div>
         </a>
         <a href="https://powertechil.com" target="_blank" rel="noopener" class="result-card fade-up stagger-1">
-          <div class="result-image" style="background: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+          <div class="result-image" style="background: url('https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
           <div class="result-stat">PowerTech</div>
           <div class="result-context">Website Design & Development</div>
           <div class="result-client">powertechil.com</div>
         </a>
         <a href="https://opa-kitchen.vercel.app" target="_blank" rel="noopener" class="result-card fade-up stagger-2">
-          <div class="result-image" style="background: url('https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+          <div class="result-image" style="background: url('https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
           <div class="result-stat">Opa Kitchen</div>
           <div class="result-context">Website Design & Development</div>
           <div class="result-client">opa-kitchen.vercel.app</div>
