@@ -87,40 +87,35 @@
     .includes-card p { font-size: 15px; font-weight: 300; color: var(--color-dark); opacity: 0.65; line-height: 1.65; }
 
     /* ── Pricing ── */
-    .pricing-section { background: linear-gradient(160deg, var(--color-dark-deep) 0%, var(--color-dark) 100%); padding: 120px 64px; }
-    .pricing-section .section-header h2 { color: var(--color-white); }
-    .pricing-section .section-header .eyebrow { color: var(--color-sage-muted); }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto; }
-    .pricing-card { border-radius: 20px; padding: 44px 36px; display: flex; flex-direction: column; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s; }
-    .pricing-card.glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
-    .pricing-card.glass:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(0,0,0,0.2); }
-    .pricing-card.featured { background: var(--color-white); box-shadow: 0 8px 40px rgba(0,0,0,0.25); position: relative; }
-    .pricing-card.featured:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(0,0,0,0.3); }
-    .pricing-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--color-taupe); color: var(--color-white); font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 20px; border-radius: 50px; white-space: nowrap; }
-    .pricing-card .card-name { font-family: var(--font-headline); font-size: 24px; font-weight: 400; margin-bottom: 16px; }
-    .pricing-card.glass .card-name { color: var(--color-white); }
-    .pricing-card.featured .card-name { color: var(--color-dark); }
-    .pricing-card .card-price { font-family: var(--font-headline); font-size: 44px; font-weight: 400; line-height: 1; margin-bottom: 6px; }
-    .pricing-card.glass .card-price { color: var(--color-white); }
-    .pricing-card.featured .card-price { color: var(--color-dark); }
-    .pricing-card .card-price-context { font-family: var(--font-ui); font-size: 13px; font-weight: 400; margin-bottom: 32px; }
-    .pricing-card.glass .card-price-context { color: var(--color-sage-muted); }
-    .pricing-card.featured .card-price-context { color: var(--color-taupe); }
-    .pricing-card .card-divider { height: 1px; margin-bottom: 32px; }
-    .pricing-card.glass .card-divider { background: rgba(255,255,255,0.1); }
-    .pricing-card.featured .card-divider { background: var(--color-sand); }
-    .pricing-card .card-features { list-style: none; margin: 0 0 40px; flex-grow: 1; }
-    .pricing-card .card-features li { font-size: 15px; padding: 9px 0 9px 28px; position: relative; }
-    .pricing-card.glass .card-features li { color: rgba(255,255,255,0.75); }
-    .pricing-card.featured .card-features li { color: var(--color-dark); }
-    .pricing-card .card-features li::before { content: "\2713"; position: absolute; left: 0; font-weight: 600; }
-    .pricing-card.glass .card-features li::before { color: var(--color-sage); }
-    .pricing-card.featured .card-features li::before { color: var(--color-taupe); }
-    .pricing-card .card-cta { display: block; font-family: var(--font-ui); font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-align: center; padding: 18px 32px; border-radius: 50px; transition: all 0.3s; cursor: pointer; }
-    .pricing-card.glass .card-cta { background: rgba(255,255,255,0.1); color: var(--color-white); border: 1px solid rgba(255,255,255,0.2); }
-    .pricing-card.glass .card-cta:hover { background: var(--color-white); color: var(--color-dark); }
-    .pricing-card.featured .card-cta { background: var(--color-dark); color: var(--color-white); }
-    .pricing-card.featured .card-cta:hover { background: var(--color-taupe); }
+    .pricing { background: linear-gradient(135deg, #33333a 0%, #4a4a52 50%, #1a1a1f 100%); padding: 120px 48px; position: relative; overflow: hidden; }
+    .pricing-orb-1 { position: absolute; width: 400px; height: 400px; background: rgba(192,177,155,0.08); border-radius: 50%; filter: blur(100px); top: -100px; left: -80px; pointer-events: none; }
+    .pricing-orb-2 { position: absolute; width: 300px; height: 300px; background: rgba(178,193,196,0.06); border-radius: 50%; filter: blur(100px); bottom: -60px; right: -60px; pointer-events: none; }
+    .pricing-grid { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; position: relative; z-index: 1; }
+    .pricing-card { border-radius: 20px; padding: 44px 36px; display: flex; flex-direction: column; }
+    .pricing-card-glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+    .pricing-card-featured { background: var(--color-white); transform: scale(1.05); box-shadow: 0 24px 64px rgba(0,0,0,0.3); }
+    .pricing-badge { display: inline-block; background: var(--color-taupe); color: var(--color-white); font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 1px; padding: 6px 14px; border-radius: 100px; margin-bottom: 16px; width: fit-content; }
+    .pricing-card-glass .pricing-name { font-family: var(--font-ui); font-size: 18px; font-weight: 600; color: var(--color-white); margin-bottom: 12px; }
+    .pricing-card-featured .pricing-name { font-family: var(--font-ui); font-size: 18px; font-weight: 600; color: var(--color-dark); margin-bottom: 12px; }
+    .pricing-card-glass .pricing-price { font-family: var(--font-ui); font-size: 48px; font-weight: 700; color: var(--color-white); }
+    .pricing-card-featured .pricing-price { font-family: var(--font-ui); font-size: 48px; font-weight: 700; color: var(--color-dark); }
+    .pricing-card-glass .pricing-period { font-family: var(--font-body); font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .pricing-card-featured .pricing-period { font-family: var(--font-body); font-size: 14px; color: rgba(51,51,58,0.5); margin-bottom: 16px; }
+    .pricing-card-glass .pricing-desc { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
+    .pricing-card-featured .pricing-desc { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(51,51,58,0.55); margin-bottom: 28px; }
+    .pricing-features { list-style: none; margin-bottom: 32px; flex: 1; }
+    .pricing-card-glass .pricing-features li { font-family: var(--font-body); font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.7); padding: 8px 0; display: flex; align-items: center; gap: 10px; }
+    .pricing-card-featured .pricing-features li { font-family: var(--font-body); font-size: 15px; font-weight: 400; color: var(--color-dark); padding: 8px 0; display: flex; align-items: center; gap: 10px; }
+    .pricing-check { width: 18px; height: 18px; flex-shrink: 0; }
+    .pricing-card-glass .pricing-check { color: var(--color-taupe); }
+    .pricing-card-featured .pricing-check { color: var(--color-sage-muted); }
+    .btn-outline-pill { display: inline-block; text-align: center; font-family: var(--font-ui); font-size: 15px; font-weight: 600; padding: 14px 32px; border-radius: 100px; border: 2px solid rgba(255,255,255,0.3); color: var(--color-white); text-decoration: none; background: transparent; cursor: pointer; transition: background 0.3s, border-color 0.3s; }
+    .btn-outline-pill:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+    .btn-dark-pill { display: inline-block; text-align: center; font-family: var(--font-ui); font-size: 15px; font-weight: 600; padding: 14px 32px; border-radius: 100px; background: var(--color-dark); color: var(--color-white); text-decoration: none; border: 2px solid var(--color-dark); cursor: pointer; transition: background 0.3s, transform 0.2s; }
+    .btn-dark-pill:hover { background: var(--color-dark-deep); transform: translateY(-1px); }
+    .section-header-light h2 { color: var(--color-white); }
+    .section-header-light .section-eyebrow { color: var(--color-sage-muted); }
+    .section-header-light p { color: var(--color-sand); }
 
     /* ── Result Spotlight ── */
     .spotlight-section { background: var(--color-sand); padding: 120px 64px; }
@@ -175,7 +170,7 @@
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .hero-visual { display: none; }
       .includes-grid { grid-template-columns: repeat(2, 1fr); }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 440px; }
+      .pricing-grid { grid-template-columns: 1fr !important; max-width: 440px !important; }
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
@@ -187,7 +182,7 @@
       .nav-links.open .nav-dropdown .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; background: transparent; padding: 8px 0 0 16px; }
       .hero { padding: 130px 24px 64px; min-height: auto; }
       .hero-stats { gap: 32px; flex-wrap: wrap; }
-      .includes-section, .pricing-section, .spotlight-section, .faq-section, .cta-section { padding: 80px 24px; }
+      .includes-section, .pricing, .spotlight-section, .faq-section, .cta-section { padding: 80px 24px; }
       .includes-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       .spotlight-stats { flex-direction: column; gap: 32px; }
       footer { padding: 48px 24px 32px; }
@@ -295,40 +290,43 @@
   </section>
 
   <!-- Pricing -->
-  <section class="pricing-section">
-    <div class="section-header fade-up">
-      <span class="eyebrow">Pricing</span>
+  <section class="pricing">
+    <div class="pricing-orb-1"></div>
+    <div class="pricing-orb-2"></div>
+    <div class="section-header section-header-light fade-up" style="position: relative; z-index: 1;">
+      <p class="section-eyebrow">PRICING</p>
       <h2>Built around <em>your</em> business</h2>
+      <p>Two options to fit your needs.</p>
     </div>
-    <div class="pricing-grid" style="max-width: 800px;">
-      <div class="pricing-card glass fade-up stagger-1">
-        <div class="card-name">Loyalty App</div>
-        <div class="card-price">$2,999</div>
-        <div class="card-price-context">one-time</div>
-        <div class="card-divider"></div>
-        <ul class="card-features">
-          <li>Rewards & points system</li>
-          <li>Push notifications</li>
-          <li>Customer analytics</li>
-          <li>Admin dashboard</li>
-          <li>App Store submission</li>
+    <div class="pricing-grid">
+      <div class="pricing-card pricing-card-glass fade-up" style="transition-delay: 0s;">
+        <div class="pricing-name">Loyalty App</div>
+        <div class="pricing-price">$2,999</div>
+        <div class="pricing-period">one-time</div>
+        <p class="pricing-desc">A rewards and loyalty app that keeps customers coming back and spending more.</p>
+        <ul class="pricing-features">
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Rewards & points system</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Push notifications</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Customer analytics</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Admin dashboard</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>App Store submission</li>
         </ul>
-        <a href="/contact" class="card-cta">Schedule a Call</a>
+        <a href="/contact" class="btn-outline-pill">Schedule a Call</a>
       </div>
-      <div class="pricing-card featured fade-up stagger-2">
+      <div class="pricing-card pricing-card-featured fade-up" style="transition-delay: 0.1s;">
         <div class="pricing-badge">Full Custom</div>
-        <div class="card-name">Custom App</div>
-        <div class="card-price">$4,999</div>
-        <div class="card-price-context">starting at</div>
-        <div class="card-divider"></div>
-        <ul class="card-features">
-          <li>Fully custom design & features</li>
-          <li>Payments & booking</li>
-          <li>Push notifications</li>
-          <li>Admin dashboard</li>
-          <li>Ongoing maintenance</li>
+        <div class="pricing-name">Custom App</div>
+        <div class="pricing-price">$4,999</div>
+        <div class="pricing-period">starting at</div>
+        <p class="pricing-desc">Fully custom design and features — payments, booking, e-commerce, and more.</p>
+        <ul class="pricing-features">
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Fully custom design & features</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Payments & booking</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Push notifications</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Admin dashboard</li>
+          <li><svg class="pricing-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Ongoing maintenance</li>
         </ul>
-        <a href="/contact" class="card-cta">Schedule a Call</a>
+        <a href="/contact" class="btn-dark-pill">Schedule a Call</a>
       </div>
     </div>
   </section>

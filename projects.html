@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Projects — The Edit Collective</title>
+  <meta name="description" content="See the websites, apps, and brands we've built for our clients.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --color-dark: #33333a; --color-dark-deep: #1a1a1f; --color-taupe: #c0b19b; --color-cream: #f4f0e6;
+      --color-sand: #e4dbca; --color-white: #ffffff; --color-sage: #b2c1c4; --color-sage-muted: #9aacb0;
+      --font-headline: 'DM Serif Display', Georgia, serif; --font-body: 'Outfit', sans-serif; --font-ui: 'Inter', -apple-system, sans-serif;
+    }
+    body { font-family: var(--font-body); color: var(--color-dark); background: var(--color-cream); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 64px; display: flex; align-items: center; justify-content: space-between; background: rgba(244,240,230,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); transition: padding 0.3s; }
+    .logo { font-family: var(--font-headline); font-size: 28px; color: var(--color-dark); }
+    .nav-links { display: flex; align-items: center; gap: 44px; }
+    .nav-links a { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--color-dark); transition: opacity 0.3s; }
+    .nav-links a:hover { opacity: 0.6; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-left: 6px; margin-bottom: 2px; transition: transform 0.3s; }
+    .nav-dropdown:hover > a::after { transform: rotate(-135deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px); background: var(--color-white); border-radius: 14px; padding: 12px 0; min-width: 250px; box-shadow: 0 16px 48px rgba(0,0,0,0.12); opacity: 0; visibility: hidden; transition: all 0.25s ease; }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu a { display: block; padding: 12px 24px; font-family: var(--font-body) !important; font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--color-dark) !important; transition: background 0.2s, padding-left 0.2s; }
+    .dropdown-menu a:hover { background: var(--color-cream); padding-left: 28px; opacity: 1 !important; }
+    .dropdown-menu a span { display: block; font-size: 12px; font-weight: 300; color: var(--color-taupe); margin-top: 2px; }
+    .nav-cta { padding: 12px 26px !important; background: transparent !important; border: 1.5px solid var(--color-dark); border-radius: 50px; transition: all 0.3s ease !important; cursor: pointer; }
+    .nav-cta:hover { background: var(--color-dark) !important; color: var(--color-white) !important; opacity: 1 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--color-dark); margin: 6px 0; }
+
+    .page-hero { padding: 180px 64px 60px; background: var(--color-cream); }
+    .page-hero .eyebrow { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 24px; }
+    .page-hero h1 { font-family: var(--font-headline); font-size: clamp(44px, 6vw, 72px); color: var(--color-dark); margin-bottom: 16px; }
+    .page-hero h1 em { font-style: italic; }
+    .page-hero p { font-size: 20px; font-weight: 300; color: var(--color-dark); max-width: 560px; line-height: 1.6; }
+
+    .projects-section { padding: 60px 64px 120px; background: var(--color-cream); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+    .project-card { background: var(--color-white); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; display: block; }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(51,51,58,0.1); }
+    .project-image { width: 100%; height: 220px; background: var(--color-sand); display: flex; align-items: center; justify-content: center; }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; }
+    .project-body { padding: 28px; }
+    .project-body h2 { font-family: var(--font-headline); font-size: 24px; color: var(--color-dark); margin-bottom: 8px; }
+    .project-body .project-type { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 12px; }
+    .project-body p { font-size: 15px; font-weight: 300; line-height: 1.6; color: var(--color-dark); opacity: 0.7; }
+    .project-link { font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--color-taupe); margin-top: 16px; display: inline-block; transition: color 0.3s; }
+    .project-card:hover .project-link { color: var(--color-dark); }
+
+    .cta-banner { background: linear-gradient(135deg, var(--color-dark) 0%, #4a4a52 50%, var(--color-dark-deep) 100%); padding: 80px 64px; text-align: center; position: relative; overflow: hidden; }
+    .cta-banner::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(192,177,155,0.12) 0%, transparent 70%); top: -200px; right: -100px; pointer-events: none; }
+    .cta-banner h2 { font-family: var(--font-headline); font-size: clamp(32px, 4vw, 48px); color: var(--color-white); margin-bottom: 24px; position: relative; z-index: 2; }
+    .cta-banner h2 em { font-style: italic; color: var(--color-taupe); }
+    .cta-btn { font-family: var(--font-ui); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 40px; background: var(--color-white); color: var(--color-dark); border-radius: 50px; display: inline-block; transition: all 0.3s; position: relative; z-index: 2; }
+    .cta-btn:hover { background: var(--color-taupe); color: var(--color-white); transform: translateY(-2px); }
+
+    footer { background: var(--color-dark-deep); padding: 64px 0 40px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
+    .footer-brand { font-family: var(--font-headline); font-size: 26px; color: var(--color-white); margin-bottom: 12px; }
+    .footer-tagline { font-size: 14px; font-weight: 300; color: var(--color-sand); max-width: 280px; line-height: 1.6; }
+    .footer-links-group h4 { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-white); margin-bottom: 16px; }
+    .footer-links-group a { display: block; font-size: 15px; font-weight: 300; color: var(--color-sand); margin-bottom: 10px; transition: color 0.2s; }
+    .footer-links-group a:hover { color: var(--color-taupe); }
+    .footer-divider { height: 1px; background: rgba(192,177,155,0.15); margin-bottom: 24px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--font-ui); font-size: 12px; font-weight: 400; color: var(--color-sand); opacity: 0.5; }
+
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; } .stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; } .stagger-5 { transition-delay: 0.5s; }
+    @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; } .nav-toggle { display: block; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(244,240,230,0.98); backdrop-filter: blur(12px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(192,177,155,0.3); }
+      .page-hero { padding: 140px 24px 40px; }
+      .projects-section { padding: 40px 24px 80px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .cta-banner { padding: 60px 24px; }
+      footer { padding: 48px 0 32px; }
+      .footer-inner { flex-direction: column; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">The Edit Collective</a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <div class="nav-dropdown">
+        <a href="/#services">Services</a>
+        <div class="dropdown-menu">
+          <a href="/services/websites">Websites <span>Design & Development</span></a>
+          <a href="/services/social-media">Social Media <span>Strategy & Management</span></a>
+          <a href="/services/photo-video">Photo & Video <span>Content Production</span></a>
+          <a href="/services/apps">App Development <span>iOS & Android</span></a>
+        </div>
+      </div>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <span class="eyebrow">Our Work</span>
+    <h1>Projects we're <em>proud</em> of.</h1>
+    <p>A look at some of the websites, apps, and brands we've built for our clients.</p>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-grid">
+
+      <a href="https://produceworldil.com" target="_blank" rel="noopener" class="project-card fade-up">
+        <div class="project-image" style="background: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+        <div class="project-body">
+          <div class="project-type">Website Design</div>
+          <h2>Produce World</h2>
+          <p>A fresh, modern website for a local produce market showcasing their products and story.</p>
+          <span class="project-link">Visit site &rarr;</span>
+        </div>
+      </a>
+
+      <a href="https://powertechil.com" target="_blank" rel="noopener" class="project-card fade-up stagger-1">
+        <div class="project-image" style="background: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+        <div class="project-body">
+          <div class="project-type">Website Design</div>
+          <h2>PowerTech</h2>
+          <p>Professional website for a technology services company, built for trust and conversion.</p>
+          <span class="project-link">Visit site &rarr;</span>
+        </div>
+      </a>
+
+      <a href="https://opa-kitchen.vercel.app" target="_blank" rel="noopener" class="project-card fade-up stagger-2">
+        <div class="project-image" style="background: url('https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+        <div class="project-body">
+          <div class="project-type">Website Design</div>
+          <h2>Opa Kitchen</h2>
+          <p>A warm, inviting website for a Greek restaurant that captures the dining experience.</p>
+          <span class="project-link">Visit site &rarr;</span>
+        </div>
+      </a>
+
+      <a href="https://osteria-del-lago.vercel.app" target="_blank" rel="noopener" class="project-card fade-up stagger-3">
+        <div class="project-image" style="background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+        <div class="project-body">
+          <div class="project-type">Website Design</div>
+          <h2>Osteria Del Lago</h2>
+          <p>An elegant website for an Italian restaurant, designed to reflect their upscale dining experience.</p>
+          <span class="project-link">Visit site &rarr;</span>
+        </div>
+      </a>
+
+      <a href="https://bobs-bagels.vercel.app" target="_blank" rel="noopener" class="project-card fade-up stagger-4">
+        <div class="project-image" style="background: url('https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+        <div class="project-body">
+          <div class="project-type">Website Design</div>
+          <h2>Bob's Bagels</h2>
+          <p>A fun, approachable website for a local bagel shop that drives foot traffic and online orders.</p>
+          <span class="project-link">Visit site &rarr;</span>
+        </div>
+      </a>
+
+      <a href="https://nmjl-website.vercel.app" target="_blank" rel="noopener" class="project-card fade-up stagger-5">
+        <div class="project-image" style="background: url('https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;"></div>
+        <div class="project-body">
+          <div class="project-type">Website Design</div>
+          <h2>National Mah Jongg League</h2>
+          <p>A clean, accessible website for a national gaming organization serving thousands of members.</p>
+          <span class="project-link">Visit site &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready for your own <em>Edit</em>?</h2>
+    <a href="/contact" class="cta-btn">Start a Project</a>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">The Edit Collective</div>
+          <p class="footer-tagline">Smart marketing for small businesses that want to grow.</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Services</h4>
+          <a href="/services/websites">Websites</a>
+          <a href="/services/social-media">Social Media</a>
+          <a href="/services/photo-video">Photo & Video</a>
+          <a href="/services/apps">App Development</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <a href="/#about">About</a>
+          <a href="/projects">Projects</a>
+          <a href="/blog">Blog</a>
+          <a href="/contact">Contact</a>
+          <a href="/support">Submit a Request</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 The Edit Collective. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() { document.querySelector('.nav-links').classList.toggle('open'); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
