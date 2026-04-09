@@ -4,228 +4,485 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>App Development — The Edit Collective</title>
-  <meta name="description" content="Custom iOS and Android apps that keep customers coming back. Loyalty programs, booking systems, and more.">
+  <meta name="description" content="Custom mobile apps for iOS and Android. Loyalty programs, booking systems, and more — built to grow your business.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --color-dark: #33333a;
+      --color-dark-deep: #1a1a1f;
       --color-taupe: #c0b19b;
       --color-cream: #f4f0e6;
       --color-sand: #e4dbca;
       --color-white: #ffffff;
       --color-sage: #b2c1c4;
-      --font-headline: 'DM Serif Display', serif;
+      --color-sage-muted: #9aacb0;
+      --font-headline: 'DM Serif Display', Georgia, serif;
       --font-body: 'Outfit', sans-serif;
+      --font-ui: 'Inter', -apple-system, sans-serif;
     }
-    body { font-family: var(--font-body); color: var(--color-dark); background: var(--color-cream); -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); color: var(--color-dark); background: var(--color-cream); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    nav { position: absolute; top: 0; left: 0; right: 0; z-index: 50; padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: var(--font-headline); font-size: 30px; color: var(--color-white); }
-    .nav-links { display: flex; align-items: center; gap: 36px; }
-    .nav-links a { font-size: 17px; font-weight: 400; color: var(--color-white); letter-spacing: 0.3px; transition: opacity 0.2s; }
-    .nav-links a:hover { opacity: 0.75; }
-    .nav-cta { font-size: 16px !important; font-weight: 500 !important; padding: 14px 32px; background: var(--color-white); color: var(--color-dark) !important; border-radius: 6px; transition: background 0.3s, color 0.3s; cursor: pointer; }
-    .nav-cta:hover { background: var(--color-taupe) !important; color: var(--color-white) !important; opacity: 1 !important; }
-    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--color-white); margin: 6px 0; }
-
-    .hero { position: relative; padding: 200px 48px 120px; background: var(--color-dark); }
-    .hero-eyebrow { font-size: 14px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--color-sage); margin-bottom: 24px; }
-    .hero h1 { font-family: var(--font-headline); font-size: clamp(44px, 6vw, 72px); font-weight: 400; line-height: 1.1; color: var(--color-white); margin-bottom: 24px; }
-    .hero h1 em { font-style: italic; color: var(--color-taupe); }
-    .hero-subtitle { font-size: 20px; font-weight: 300; color: var(--color-sand); max-width: 600px; line-height: 1.6; margin-bottom: 44px; }
-    .hero-cta { display: inline-flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; padding: 20px 44px; background: var(--color-white); color: var(--color-dark); border-radius: 6px; transition: all 0.3s ease; cursor: pointer; }
-    .hero-cta:hover { background: var(--color-taupe); color: var(--color-white); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
-    .hero-cta svg { width: 20px; height: 20px; transition: transform 0.3s; }
-    .hero-cta:hover svg { transform: translateX(4px); }
-
-    .included { padding: 100px 0; background: var(--color-cream); }
-    .included h2 { font-family: var(--font-headline); font-size: clamp(32px, 4vw, 48px); color: var(--color-dark); text-align: center; margin-bottom: 56px; }
-    .included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .included-item { background: var(--color-white); padding: 32px 28px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-    .included-item svg { width: 32px; height: 32px; color: var(--color-taupe); margin-bottom: 16px; }
-    .included-item h3 { font-family: var(--font-headline); font-size: 20px; margin-bottom: 10px; }
-    .included-item p { font-size: 15px; font-weight: 300; line-height: 1.6; }
-
-    .pricing { padding: 100px 0; background: var(--color-sand); }
-    .pricing h2 { font-family: var(--font-headline); font-size: clamp(32px, 4vw, 48px); color: var(--color-dark); text-align: center; margin-bottom: 16px; }
-    .pricing-subtitle { text-align: center; font-size: 17px; font-weight: 300; color: var(--color-dark); margin-bottom: 56px; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .pricing-card { background: var(--color-white); padding: 40px 32px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); display: flex; flex-direction: column; border: 2px solid transparent; transition: all 0.3s; }
-    .pricing-card:hover { border-color: var(--color-taupe); transform: translateY(-4px); }
-    .pricing-label { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--color-sage); margin-bottom: 12px; }
-    .pricing-card h3 { font-family: var(--font-headline); font-size: 24px; margin-bottom: 8px; }
-    .pricing-desc { font-size: 15px; font-weight: 300; line-height: 1.6; color: var(--color-dark); margin-bottom: 24px; flex: 1; }
-    .pricing-features { list-style: none; margin-bottom: 32px; }
-    .pricing-features li { font-size: 14px; font-weight: 300; padding: 8px 0; border-bottom: 1px solid rgba(192,177,155,0.3); display: flex; align-items: center; gap: 10px; }
-    .pricing-features li svg { width: 16px; height: 16px; color: var(--color-taupe); flex-shrink: 0; }
-    .pricing-btn { display: block; text-align: center; font-size: 16px; font-weight: 500; padding: 16px 32px; background: var(--color-taupe); color: var(--color-white); border-radius: 6px; transition: all 0.3s; cursor: pointer; }
-    .pricing-btn:hover { background: var(--color-dark); }
-
-    .cta-banner { padding: 100px 0; background: var(--color-dark); text-align: center; }
-    .cta-banner h2 { font-family: var(--font-headline); font-size: clamp(32px, 4vw, 48px); color: var(--color-white); margin-bottom: 20px; }
-    .cta-banner p { font-size: 18px; font-weight: 300; color: var(--color-sand); margin-bottom: 40px; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; padding: 20px 44px; background: var(--color-white); color: var(--color-dark); border-radius: 6px; transition: all 0.3s; cursor: pointer; }
-    .cta-btn:hover { background: var(--color-taupe); color: var(--color-white); transform: translateY(-3px); }
-
-    footer { background: var(--color-dark); padding: 48px 0 32px; border-top: 1px solid rgba(192,177,155,0.2); }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
-    .footer-brand { font-family: var(--font-headline); font-size: 22px; color: var(--color-white); }
-    .footer-links a { font-size: 15px; font-weight: 300; color: var(--color-sand); margin-left: 28px; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--color-taupe); }
-    .footer-copy { text-align: center; font-size: 13px; font-weight: 300; color: var(--color-sand); opacity: 0.6; margin-top: 24px; }
-
-    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    /* Fade-up animations */
+    .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+    .stagger-1 { transition-delay: 0.05s; }
+    .stagger-2 { transition-delay: 0.1s; }
+    .stagger-3 { transition-delay: 0.15s; }
+    .stagger-4 { transition-delay: 0.2s; }
+    .stagger-5 { transition-delay: 0.25s; }
+    .stagger-6 { transition-delay: 0.3s; }
 
+    /* ── Nav ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; background: transparent; transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s, padding 0.3s; }
+    nav.scrolled { background: rgba(244, 240, 230, 0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 2px 24px rgba(0,0,0,0.07); padding: 20px 64px; }
+    .logo { font-family: var(--font-headline); font-size: 28px; color: var(--color-dark); }
+    .nav-links { display: flex; align-items: center; gap: 48px; }
+    .nav-links a { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--color-dark); transition: opacity 0.3s; }
+    .nav-links a:hover { opacity: 0.6; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-left: 6px; margin-bottom: 2px; transition: transform 0.3s; }
+    .nav-dropdown:hover > a::after { transform: rotate(-135deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px); background: var(--color-white); border-radius: 12px; padding: 16px 0; min-width: 240px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); opacity: 0; visibility: hidden; transition: opacity 0.25s, visibility 0.25s, transform 0.25s; }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu a { display: block; padding: 12px 24px; font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--color-dark) !important; transition: background 0.2s, padding-left 0.2s; }
+    .dropdown-menu a:hover { background: var(--color-cream); padding-left: 28px; opacity: 1 !important; }
+    .dropdown-menu a span { display: block; font-size: 12px; font-weight: 300; color: var(--color-taupe); margin-top: 2px; }
+    .nav-cta { padding: 14px 28px !important; background: transparent !important; border: 1.5px solid var(--color-dark); border-radius: 50px; cursor: pointer; transition: all 0.3s !important; }
+    .nav-cta:hover { background: var(--color-dark) !important; color: var(--color-white) !important; opacity: 1 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--color-dark); margin: 6px 0; transition: transform 0.3s, opacity 0.3s; }
+
+    /* ── Hero ── */
+    .hero { min-height: 100vh; background: linear-gradient(160deg, var(--color-dark-deep) 0%, var(--color-dark) 50%, #3d3d46 100%); position: relative; overflow: hidden; display: flex; align-items: center; padding: 140px 64px 80px; }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; pointer-events: none; }
+    .hero-orb--1 { width: 500px; height: 500px; background: var(--color-taupe); top: -120px; right: -100px; }
+    .hero-orb--2 { width: 350px; height: 350px; background: var(--color-sage); bottom: -80px; left: -60px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1300px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+    .hero-content .eyebrow { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 24px; display: block; }
+    .hero-content h1 { font-family: var(--font-headline); font-size: clamp(40px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: var(--color-white); margin-bottom: 24px; }
+    .hero-content h1 em { font-style: italic; color: var(--color-taupe); }
+    .hero-content .subtitle { font-size: 18px; font-weight: 300; color: var(--color-sand); max-width: 480px; line-height: 1.7; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 48px; }
+    .hero-stat-number { font-family: var(--font-headline); font-size: 36px; color: var(--color-white); line-height: 1; margin-bottom: 6px; }
+    .hero-stat-label { font-family: var(--font-ui); font-size: 13px; font-weight: 400; color: var(--color-sage-muted); letter-spacing: 0.5px; }
+    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    .hero-placeholder { width: 100%; aspect-ratio: 3 / 4; max-width: 380px; border-radius: 24px; background: rgba(255,255,255,0.06); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+    .hero-placeholder svg { width: 64px; height: 64px; color: rgba(255,255,255,0.15); }
+
+    /* ── What's Included ── */
+    .includes-section { background: var(--color-cream); padding: 120px 64px; }
+    .section-header { text-align: center; margin-bottom: 72px; }
+    .section-header .eyebrow { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 16px; display: block; }
+    .section-header h2 { font-family: var(--font-headline); font-size: clamp(32px, 4vw, 52px); font-weight: 400; color: var(--color-dark); line-height: 1.15; }
+    .section-header h2 em { font-style: italic; }
+    .includes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; }
+    .includes-card { background: var(--color-white); border-radius: 16px; padding: 40px 32px; text-align: center; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s; }
+    .includes-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(51,51,58,0.08); }
+    .includes-card svg { width: 44px; height: 44px; color: var(--color-taupe); margin-bottom: 24px; }
+    .includes-card h3 { font-family: var(--font-headline); font-size: 20px; font-weight: 400; color: var(--color-dark); margin-bottom: 12px; }
+    .includes-card p { font-size: 15px; font-weight: 300; color: var(--color-dark); opacity: 0.65; line-height: 1.65; }
+
+    /* ── Pricing ── */
+    .pricing-section { background: linear-gradient(160deg, var(--color-dark-deep) 0%, var(--color-dark) 100%); padding: 120px 64px; }
+    .pricing-section .section-header h2 { color: var(--color-white); }
+    .pricing-section .section-header .eyebrow { color: var(--color-sage-muted); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto; }
+    .pricing-card { border-radius: 20px; padding: 44px 36px; display: flex; flex-direction: column; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s; }
+    .pricing-card.glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+    .pricing-card.glass:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(0,0,0,0.2); }
+    .pricing-card.featured { background: var(--color-white); box-shadow: 0 8px 40px rgba(0,0,0,0.25); position: relative; }
+    .pricing-card.featured:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(0,0,0,0.3); }
+    .pricing-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--color-taupe); color: var(--color-white); font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 20px; border-radius: 50px; white-space: nowrap; }
+    .pricing-card .card-name { font-family: var(--font-headline); font-size: 24px; font-weight: 400; margin-bottom: 16px; }
+    .pricing-card.glass .card-name { color: var(--color-white); }
+    .pricing-card.featured .card-name { color: var(--color-dark); }
+    .pricing-card .card-price { font-family: var(--font-headline); font-size: 44px; font-weight: 400; line-height: 1; margin-bottom: 6px; }
+    .pricing-card.glass .card-price { color: var(--color-white); }
+    .pricing-card.featured .card-price { color: var(--color-dark); }
+    .pricing-card .card-price-context { font-family: var(--font-ui); font-size: 13px; font-weight: 400; margin-bottom: 32px; }
+    .pricing-card.glass .card-price-context { color: var(--color-sage-muted); }
+    .pricing-card.featured .card-price-context { color: var(--color-taupe); }
+    .pricing-card .card-divider { height: 1px; margin-bottom: 32px; }
+    .pricing-card.glass .card-divider { background: rgba(255,255,255,0.1); }
+    .pricing-card.featured .card-divider { background: var(--color-sand); }
+    .pricing-card .card-features { list-style: none; margin: 0 0 40px; flex-grow: 1; }
+    .pricing-card .card-features li { font-size: 15px; padding: 9px 0 9px 28px; position: relative; }
+    .pricing-card.glass .card-features li { color: rgba(255,255,255,0.75); }
+    .pricing-card.featured .card-features li { color: var(--color-dark); }
+    .pricing-card .card-features li::before { content: "\2713"; position: absolute; left: 0; font-weight: 600; }
+    .pricing-card.glass .card-features li::before { color: var(--color-sage); }
+    .pricing-card.featured .card-features li::before { color: var(--color-taupe); }
+    .pricing-card .card-cta { display: block; font-family: var(--font-ui); font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-align: center; padding: 18px 32px; border-radius: 50px; transition: all 0.3s; cursor: pointer; }
+    .pricing-card.glass .card-cta { background: rgba(255,255,255,0.1); color: var(--color-white); border: 1px solid rgba(255,255,255,0.2); }
+    .pricing-card.glass .card-cta:hover { background: var(--color-white); color: var(--color-dark); }
+    .pricing-card.featured .card-cta { background: var(--color-dark); color: var(--color-white); }
+    .pricing-card.featured .card-cta:hover { background: var(--color-taupe); }
+
+    /* ── Result Spotlight ── */
+    .spotlight-section { background: var(--color-sand); padding: 120px 64px; }
+    .spotlight-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .spotlight-quote { font-family: var(--font-headline); font-size: clamp(24px, 3.5vw, 36px); font-weight: 400; font-style: italic; color: var(--color-dark); line-height: 1.5; margin-bottom: 32px; position: relative; }
+    .spotlight-quote::before { content: '\201C'; font-size: 80px; color: var(--color-taupe); opacity: 0.4; position: absolute; top: -20px; left: -10px; line-height: 1; }
+    .spotlight-author { font-family: var(--font-ui); font-size: 15px; font-weight: 600; color: var(--color-dark); margin-bottom: 4px; }
+    .spotlight-role { font-family: var(--font-ui); font-size: 14px; font-weight: 400; color: var(--color-taupe); margin-bottom: 56px; }
+    .spotlight-stats { display: flex; justify-content: center; gap: 72px; }
+    .spotlight-stat-number { font-family: var(--font-headline); font-size: 40px; color: var(--color-dark); line-height: 1; margin-bottom: 8px; }
+    .spotlight-stat-label { font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--color-taupe); letter-spacing: 0.5px; }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--color-cream); padding: 120px 64px; }
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--color-sand); }
+    .faq-question { width: 100%; background: none; border: none; font-family: var(--font-body); font-size: 18px; font-weight: 500; color: var(--color-dark); padding: 28px 40px 28px 0; text-align: left; cursor: pointer; position: relative; transition: color 0.3s; }
+    .faq-question:hover { color: var(--color-taupe); }
+    .faq-question::after { content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 24px; font-weight: 300; color: var(--color-taupe); transition: transform 0.3s; }
+    .faq-item.open .faq-question::after { transform: translateY(-50%) rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1), padding 0.4s; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer p { font-size: 16px; font-weight: 300; color: var(--color-dark); opacity: 0.7; line-height: 1.7; padding-bottom: 28px; }
+
+    /* ── CTA Banner ── */
+    .cta-section { background: linear-gradient(160deg, var(--color-dark-deep) 0%, var(--color-dark) 100%); padding: 120px 64px; text-align: center; position: relative; overflow: hidden; }
+    .cta-orb { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: var(--color-taupe); filter: blur(120px); opacity: 0.15; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+    .cta-section h2 { font-family: var(--font-headline); font-size: clamp(36px, 5vw, 56px); font-weight: 400; color: var(--color-white); margin-bottom: 40px; position: relative; z-index: 1; }
+    .cta-section h2 em { font-style: italic; color: var(--color-taupe); }
+    .cta-buttons { display: flex; justify-content: center; gap: 20px; position: relative; z-index: 1; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; font-family: var(--font-ui); font-size: 14px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 20px 44px; background: var(--color-taupe); color: var(--color-white); border-radius: 50px; transition: all 0.3s; cursor: pointer; }
+    .btn-primary:hover { background: var(--color-sand); color: var(--color-dark); }
+    .btn-secondary { display: inline-block; font-family: var(--font-ui); font-size: 14px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 20px 44px; background: transparent; color: var(--color-white); border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50px; transition: all 0.3s; cursor: pointer; }
+    .btn-secondary:hover { background: var(--color-white); color: var(--color-dark); border-color: var(--color-white); }
+
+    /* ── Footer ── */
+    footer { background: var(--color-dark-deep); padding: 64px 64px 40px; }
+    .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-brand { font-family: var(--font-headline); font-size: 24px; color: var(--color-white); margin-bottom: 16px; }
+    .footer-brand-desc { font-size: 15px; font-weight: 300; color: var(--color-sand); opacity: 0.7; line-height: 1.7; max-width: 300px; }
+    .footer-col h4 { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 20px; }
+    .footer-col a { display: block; font-size: 15px; font-weight: 300; color: var(--color-sand); margin-bottom: 12px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--color-white); }
+    .footer-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 32px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--font-ui); font-size: 13px; font-weight: 400; color: var(--color-sand); opacity: 0.5; }
+    .footer-bottom-links a { font-family: var(--font-ui); font-size: 13px; font-weight: 400; color: var(--color-sand); opacity: 0.5; margin-left: 32px; transition: opacity 0.2s; }
+    .footer-bottom-links a:hover { opacity: 1; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { display: none; }
+      .includes-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 440px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
+      nav.scrolled { padding: 16px 24px; }
       .nav-links { display: none; }
       .nav-toggle { display: block; }
-      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-dark); padding: 24px; gap: 20px; }
-      .hero { padding: 160px 24px 80px; }
-      .included-grid, .pricing-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
-      .footer-links a { margin: 0 14px; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(244,240,230,0.96); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(192,177,155,0.3); }
+      .nav-links.open .nav-dropdown .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; background: transparent; padding: 8px 0 0 16px; }
+      .hero { padding: 130px 24px 64px; min-height: auto; }
+      .hero-stats { gap: 32px; flex-wrap: wrap; }
+      .includes-section, .pricing-section, .spotlight-section, .faq-section, .cta-section { padding: 80px 24px; }
+      .includes-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .spotlight-stats { flex-direction: column; gap: 32px; }
+      footer { padding: 48px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-bottom-links a { margin: 0 16px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Nav -->
   <nav>
     <a href="/" class="logo">The Edit Collective</a>
     <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/#services">Services</a>
-      <a href="/contact" class="nav-cta">Get in Touch</a>
+      <a href="/#about">About</a>
+      <div class="nav-dropdown">
+        <a href="/#services">Services</a>
+        <div class="dropdown-menu">
+          <a href="/services/websites">Websites <span>Design & Development</span></a>
+          <a href="/services/social-media">Social Media <span>Strategy & Management</span></a>
+          <a href="/services/photo-video">Photo & Video <span>Content Production</span></a>
+          <a href="/services/apps">App Development <span>iOS & Android</span></a>
+        </div>
+      </div>
+      <a href="/blog">Blog</a>
+      <a href="/contact" class="nav-cta">Contact</a>
     </div>
   </nav>
 
+  <!-- Hero -->
   <section class="hero">
-    <p class="hero-eyebrow">The Edit Collective</p>
-    <h1>Mobile apps that keep customers <em>coming back</em>.</h1>
-    <p class="hero-subtitle">Whether it's a loyalty program, booking system, or something entirely custom — we build apps that make sense for your business.</p>
-    <a href="/contact" class="hero-cta">Let's Build Your App <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
-  </section>
-
-  <section class="included">
-    <div class="container">
-      <h2 class="fade-up">What's Included</h2>
-      <div class="included-grid">
-        <div class="included-item fade-up">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
-          <h3>iOS & Android</h3>
-          <p>Native and cross-platform development for both major app stores.</p>
+    <div class="hero-orb hero-orb--1"></div>
+    <div class="hero-orb hero-orb--2"></div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow fade-up">App Development</span>
+        <h1 class="fade-up stagger-1">Mobile apps that keep customers <em>coming back</em></h1>
+        <p class="subtitle fade-up stagger-2">Loyalty programs, booking systems, or something entirely custom. We build apps that make sense for your business.</p>
+        <div class="hero-stats fade-up stagger-3">
+          <div>
+            <div class="hero-stat-number">10+</div>
+            <div class="hero-stat-label">Apps launched</div>
+          </div>
+          <div>
+            <div class="hero-stat-number">50K+</div>
+            <div class="hero-stat-label">Downloads</div>
+          </div>
+          <div>
+            <div class="hero-stat-number">4.9&#9733;</div>
+            <div class="hero-stat-label">Client rating</div>
+          </div>
         </div>
-        <div class="included-item fade-up">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
-          <h3>Loyalty & Rewards</h3>
-          <p>Points systems, rewards programs, and retention features that keep customers engaged.</p>
-        </div>
-        <div class="included-item fade-up">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-          <h3>Booking & Scheduling</h3>
-          <p>Let customers book appointments, reserve tables, or schedule services directly.</p>
-        </div>
-        <div class="included-item fade-up">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
-          <h3>Payments</h3>
-          <p>Secure transaction and payment integration for in-app purchases and services.</p>
-        </div>
-        <div class="included-item fade-up">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
-          <h3>Push Notifications</h3>
-          <p>Stay connected with customers through timely, relevant push notifications.</p>
-        </div>
-        <div class="included-item fade-up">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.1-5.1m0 0L11.42 4.97m-5.1 5.1H21M3 3v18"/></svg>
-          <h3>Ongoing Maintenance</h3>
-          <p>Regular updates, bug fixes, and feature additions to keep your app running smoothly.</p>
+      </div>
+      <div class="hero-visual fade-up stagger-2">
+        <div class="hero-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+            <rect x="5" y="2" width="14" height="20" rx="3" />
+            <line x1="12" y1="18" x2="12" y2="18.01" stroke-width="2" stroke-linecap="round" />
+          </svg>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="pricing">
-    <div class="container">
-      <h2 class="fade-up">Investment</h2>
-      <p class="pricing-subtitle fade-up">Custom pricing based on scope. All apps start with a discovery call.</p>
-      <div class="pricing-grid">
-
-        <div class="pricing-card fade-up">
-          <span class="pricing-label">Foundation</span>
-          <h3>Basic App</h3>
-          <p class="pricing-desc">A clean, informational app with core features. Perfect for businesses that need a mobile presence with essential functionality.</p>
-          <ul class="pricing-features">
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Custom UI design</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Core feature set</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> App Store submission</li>
-          </ul>
-          <a href="/contact" class="pricing-btn">Schedule a Call</a>
-        </div>
-
-        <div class="pricing-card fade-up">
-          <span class="pricing-label">Retention</span>
-          <h3>Loyalty App</h3>
-          <p class="pricing-desc">Points, rewards, and customer retention features that keep people coming back and spending more.</p>
-          <ul class="pricing-features">
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Rewards & points system</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Push notifications</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Customer analytics</li>
-          </ul>
-          <a href="/contact" class="pricing-btn">Schedule a Call</a>
-        </div>
-
-        <div class="pricing-card fade-up">
-          <span class="pricing-label">Full Commerce</span>
-          <h3>Transactional App</h3>
-          <p class="pricing-desc">Full payment integration, booking, e-commerce — everything needed for customers to transact directly in-app.</p>
-          <ul class="pricing-features">
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Payment processing</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Booking & scheduling</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> E-commerce features</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Admin dashboard</li>
-          </ul>
-          <a href="/contact" class="pricing-btn">Schedule a Call</a>
-        </div>
-
+  <!-- What's Included -->
+  <section class="includes-section">
+    <div class="section-header fade-up">
+      <span class="eyebrow">What's Included</span>
+      <h2>Everything you need to <em>launch</em></h2>
+    </div>
+    <div class="includes-grid">
+      <div class="includes-card fade-up stagger-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M9 22h6"/><circle cx="12" cy="18" r="0.5" fill="currentColor"/></svg>
+        <h3>iOS & Android</h3>
+        <p>Native or cross-platform apps that feel right at home on every device your customers use.</p>
+      </div>
+      <div class="includes-card fade-up stagger-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+        <h3>Loyalty & Rewards</h3>
+        <p>Points systems, punch cards, and tiered rewards that keep customers engaged and coming back.</p>
+      </div>
+      <div class="includes-card fade-up stagger-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+        <h3>Booking & Scheduling</h3>
+        <p>Let customers book appointments, reserve tables, or schedule services directly from the app.</p>
+      </div>
+      <div class="includes-card fade-up stagger-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <h3>Payments</h3>
+        <p>Secure payment processing, in-app purchases, and seamless checkout experiences built in.</p>
+      </div>
+      <div class="includes-card fade-up stagger-5">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <h3>Push Notifications</h3>
+        <p>Targeted messages that drive engagement, promote offers, and keep your brand top of mind.</p>
+      </div>
+      <div class="includes-card fade-up stagger-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        <h3>Ongoing Maintenance</h3>
+        <p>Regular updates, bug fixes, and feature improvements so your app stays current and reliable.</p>
       </div>
     </div>
   </section>
 
-  <section class="cta-banner">
-    <div class="container fade-up">
-      <h2>Ready to get started?</h2>
-      <p>Every app starts with a conversation. Let's talk about yours.</p>
-      <a href="/contact" class="cta-btn">Let's Build Your App</a>
+  <!-- Pricing -->
+  <section class="pricing-section">
+    <div class="section-header fade-up">
+      <span class="eyebrow">Pricing</span>
+      <h2>Built around <em>your</em> business</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card glass fade-up stagger-1">
+        <div class="card-name">Basic App</div>
+        <div class="card-price">Custom</div>
+        <div class="card-price-context">based on project scope</div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Custom UI design</li>
+          <li>Core feature set</li>
+          <li>App Store submission</li>
+          <li>Post-launch support</li>
+        </ul>
+        <a href="/contact" class="card-cta">Schedule a Call</a>
+      </div>
+      <div class="pricing-card featured fade-up stagger-2">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="card-name">Loyalty App</div>
+        <div class="card-price">Custom</div>
+        <div class="card-price-context">based on project scope</div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Rewards & points system</li>
+          <li>Push notifications</li>
+          <li>Customer analytics</li>
+          <li>Admin dashboard</li>
+        </ul>
+        <a href="/contact" class="card-cta">Schedule a Call</a>
+      </div>
+      <div class="pricing-card glass fade-up stagger-3">
+        <div class="card-name">Transactional App</div>
+        <div class="card-price">Custom</div>
+        <div class="card-price-context">based on project scope</div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Payment processing</li>
+          <li>Booking & scheduling</li>
+          <li>E-commerce features</li>
+          <li>Admin dashboard</li>
+        </ul>
+        <a href="/contact" class="card-cta">Schedule a Call</a>
+      </div>
     </div>
   </section>
 
+  <!-- Result Spotlight -->
+  <section class="spotlight-section">
+    <div class="spotlight-inner">
+      <blockquote class="spotlight-quote fade-up">The app they built for us completely changed how we engage with customers. Repeat visits are up 40% since launch.</blockquote>
+      <div class="spotlight-author fade-up stagger-1">David Chen</div>
+      <div class="spotlight-role fade-up stagger-1">Owner, Lucky Bowl</div>
+      <div class="spotlight-stats fade-up stagger-2">
+        <div>
+          <div class="spotlight-stat-number">+40%</div>
+          <div class="spotlight-stat-label">Repeat visits</div>
+        </div>
+        <div>
+          <div class="spotlight-stat-number">15K</div>
+          <div class="spotlight-stat-label">App downloads</div>
+        </div>
+        <div>
+          <div class="spotlight-stat-number">4.8&#9733;</div>
+          <div class="spotlight-stat-label">App Store rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-header fade-up">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up stagger-1">
+        <button class="faq-question">How long does it take to build an app?</button>
+        <div class="faq-answer">
+          <p>Most projects take 8 to 16 weeks from kickoff to App Store submission, depending on complexity. A basic loyalty app sits on the shorter end, while apps with payments, booking, and admin dashboards land closer to 16 weeks. We'll give you a detailed timeline during our initial consultation.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-up stagger-2">
+        <button class="faq-question">Do you build for both iOS and Android?</button>
+        <div class="faq-answer">
+          <p>Yes. We build cross-platform apps using modern frameworks that deliver native performance on both iOS and Android from a single codebase. If your audience skews heavily toward one platform, we can start there and expand later.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-up stagger-3">
+        <button class="faq-question">What happens after launch?</button>
+        <div class="faq-answer">
+          <p>Every project includes a post-launch support window. After that, we offer ongoing maintenance plans that cover bug fixes, OS updates, performance monitoring, and feature additions. We treat your app like a living product, not a one-and-done project.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-up stagger-4">
+        <button class="faq-question">How much does a custom app cost?</button>
+        <div class="faq-answer">
+          <p>It depends on the scope. A straightforward loyalty or booking app might start in the low five figures, while a full-featured transactional app with payments and admin tools will be higher. We'll scope your project for free and give you a transparent quote before any work begins.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-orb"></div>
+    <h2 class="fade-up">Ready to <em>launch</em>?</h2>
+    <div class="cta-buttons fade-up stagger-1">
+      <a href="/contact" class="btn-primary">Start Your Project</a>
+      <a href="/contact" class="btn-secondary">Schedule a Call</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <a href="/" class="footer-brand">The Edit Collective</a>
-        <div class="footer-links">
-          <a href="/">Home</a>
-          <a href="/#services">Services</a>
-          <a href="/contact">Contact</a>
-        </div>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">The Edit Collective</div>
+        <p class="footer-brand-desc">A full-service marketing agency for businesses that want to look as good as they actually are.</p>
       </div>
-      <p class="footer-copy">&copy; 2026 The Edit Collective. All rights reserved.</p>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/services/websites">Websites</a>
+        <a href="/services/social-media">Social Media</a>
+        <a href="/services/photo-video">Photo & Video</a>
+        <a href="/services/apps">App Development</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/#about">About</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 The Edit Collective. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    document.querySelector('.nav-toggle').addEventListener('click', function() { document.querySelector('.nav-links').classList.toggle('open'); });
-    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.15 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    // Mobile nav toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+
+    // Frosted glass nav on scroll
+    window.addEventListener('scroll', function() {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Fade-up on scroll (IntersectionObserver)
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(function(el) {
+      observer.observe(el);
+    });
   </script>
+
 </body>
 </html>

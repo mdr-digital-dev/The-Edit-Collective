@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — The Edit Collective</title>
+  <meta name="description" content="Insights, strategies, and tips to help small businesses grow their brand.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --color-dark: #33333a; --color-dark-deep: #1a1a1f; --color-taupe: #c0b19b; --color-cream: #f4f0e6;
+      --color-sand: #e4dbca; --color-white: #ffffff; --color-sage: #b2c1c4; --color-sage-muted: #9aacb0;
+      --font-headline: 'DM Serif Display', Georgia, serif; --font-body: 'Outfit', sans-serif; --font-ui: 'Inter', -apple-system, sans-serif;
+    }
+    body { font-family: var(--font-body); color: var(--color-dark); background: var(--color-cream); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 64px; display: flex; align-items: center; justify-content: space-between; background: transparent; transition: background 0.3s, box-shadow 0.3s, padding 0.3s; }
+    nav.scrolled { background: rgba(244,240,230,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); padding: 18px 64px; }
+    .logo { font-family: var(--font-headline); font-size: 28px; color: var(--color-dark); }
+    .nav-links { display: flex; align-items: center; gap: 44px; }
+    .nav-links a { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--color-dark); transition: opacity 0.3s; }
+    .nav-links a:hover { opacity: 0.6; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-left: 6px; margin-bottom: 2px; transition: transform 0.3s; }
+    .nav-dropdown:hover > a::after { transform: rotate(-135deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px); background: var(--color-white); border-radius: 14px; padding: 12px 0; min-width: 250px; box-shadow: 0 16px 48px rgba(0,0,0,0.12); opacity: 0; visibility: hidden; transition: all 0.25s ease; }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu a { display: block; padding: 12px 24px; font-family: var(--font-body) !important; font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--color-dark) !important; transition: background 0.2s, padding-left 0.2s; }
+    .dropdown-menu a:hover { background: var(--color-cream); padding-left: 28px; opacity: 1 !important; }
+    .dropdown-menu a span { display: block; font-size: 12px; font-weight: 300; color: var(--color-taupe); margin-top: 2px; }
+    .nav-cta { padding: 12px 26px !important; background: transparent !important; border: 1.5px solid var(--color-dark); border-radius: 50px; transition: all 0.3s ease !important; cursor: pointer; }
+    .nav-cta:hover { background: var(--color-dark) !important; color: var(--color-white) !important; opacity: 1 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--color-dark); margin: 6px 0; }
+
+    /* Blog Hero */
+    .blog-hero { padding: 180px 64px 80px; background: var(--color-cream); }
+    .blog-hero .eyebrow { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 24px; }
+    .blog-hero h1 { font-family: var(--font-headline); font-size: clamp(44px, 6vw, 72px); color: var(--color-dark); margin-bottom: 16px; }
+    .blog-hero h1 em { font-style: italic; }
+    .blog-hero p { font-size: 20px; font-weight: 300; color: var(--color-dark); max-width: 560px; line-height: 1.6; }
+
+    /* Blog Grid */
+    .blog-grid-section { padding: 80px 64px 120px; background: var(--color-cream); }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+    .blog-card { background: var(--color-white); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; display: flex; flex-direction: column; }
+    .blog-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(51,51,58,0.1); }
+    .blog-card-image { width: 100%; height: 220px; background: var(--color-sand); display: flex; align-items: center; justify-content: center; }
+    .blog-card-image .category-badge { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-white); background: var(--color-taupe); padding: 6px 16px; border-radius: 50px; }
+    .blog-card-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-meta { font-family: var(--font-ui); font-size: 12px; font-weight: 500; color: var(--color-sage-muted); margin-bottom: 12px; }
+    .blog-card-body h2 { font-family: var(--font-headline); font-size: 24px; color: var(--color-dark); line-height: 1.3; margin-bottom: 12px; }
+    .blog-card-body p { font-size: 15px; font-weight: 300; line-height: 1.6; color: var(--color-dark); opacity: 0.75; flex: 1; }
+    .blog-card-link { font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--color-taupe); margin-top: 20px; transition: color 0.3s; }
+    .blog-card:hover .blog-card-link { color: var(--color-dark); }
+
+    /* Footer */
+    footer { background: var(--color-dark-deep); padding: 64px 0 40px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
+    .footer-brand { font-family: var(--font-headline); font-size: 26px; color: var(--color-white); margin-bottom: 12px; }
+    .footer-tagline { font-size: 14px; font-weight: 300; color: var(--color-sand); max-width: 280px; line-height: 1.6; }
+    .footer-links-group h4 { font-family: var(--font-ui); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--color-white); margin-bottom: 16px; }
+    .footer-links-group a { display: block; font-size: 15px; font-weight: 300; color: var(--color-sand); margin-bottom: 10px; transition: color 0.2s; }
+    .footer-links-group a:hover { color: var(--color-taupe); }
+    .footer-divider { height: 1px; background: rgba(192,177,155,0.15); margin-bottom: 24px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--font-ui); font-size: 12px; font-weight: 400; color: var(--color-sand); opacity: 0.5; }
+
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; } nav.scrolled { padding: 16px 24px; }
+      .nav-links { display: none; } .nav-toggle { display: block; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(244,240,230,0.98); backdrop-filter: blur(12px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(192,177,155,0.3); }
+      .blog-hero { padding: 140px 24px 60px; }
+      .blog-grid-section { padding: 40px 24px 80px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      footer { padding: 48px 0 32px; }
+      .footer-inner { flex-direction: column; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">The Edit Collective</a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <div class="nav-dropdown">
+        <a href="/#services">Services</a>
+        <div class="dropdown-menu">
+          <a href="/services/websites">Websites <span>Design & Development</span></a>
+          <a href="/services/social-media">Social Media <span>Strategy & Management</span></a>
+          <a href="/services/photo-video">Photo & Video <span>Content Production</span></a>
+          <a href="/services/apps">App Development <span>iOS & Android</span></a>
+        </div>
+      </div>
+      <a href="/blog">Blog</a>
+      <a href="/contact" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <span class="eyebrow">The Edit Collective Blog</span>
+    <h1>Insights to help your brand <em>grow</em>.</h1>
+    <p>Strategies, tips, and real talk about marketing for small businesses.</p>
+  </section>
+
+  <section class="blog-grid-section">
+    <div class="blog-grid">
+
+      <a href="/blog/why-your-small-business-needs-a-website-in-2026" class="blog-card fade-up">
+        <div class="blog-card-image">
+          <span class="category-badge">Websites</span>
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-meta">April 8, 2026</span>
+          <h2>Why Your Small Business Needs a Website in 2026</h2>
+          <p>A Google Business Profile isn't enough anymore. Here's why a real website is the foundation of everything else you do online.</p>
+          <span class="blog-card-link">Read more &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/blog/5-social-media-mistakes-small-businesses-make" class="blog-card fade-up stagger-1">
+        <div class="blog-card-image">
+          <span class="category-badge">Social Media</span>
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-meta">April 3, 2026</span>
+          <h2>5 Social Media Mistakes Small Businesses Make (And How to Fix Them)</h2>
+          <p>Posting without a strategy is like shouting into the void. Here are the most common mistakes we see and what to do instead.</p>
+          <span class="blog-card-link">Read more &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/blog/how-to-build-a-brand-people-remember" class="blog-card fade-up stagger-2">
+        <div class="blog-card-image">
+          <span class="category-badge">Branding</span>
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-meta">March 27, 2026</span>
+          <h2>How to Build a Brand People Actually Remember</h2>
+          <p>Your brand is more than a logo. It's how people feel when they interact with your business. Here's how to make it stick.</p>
+          <span class="blog-card-link">Read more &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">The Edit Collective</div>
+          <p class="footer-tagline">Smart marketing for small businesses that want to grow.</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Services</h4>
+          <a href="/services/websites">Websites</a>
+          <a href="/services/social-media">Social Media</a>
+          <a href="/services/photo-video">Photo & Video</a>
+          <a href="/services/apps">App Development</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <a href="/#about">About</a>
+          <a href="/#results">Work</a>
+          <a href="/blog">Blog</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 The Edit Collective. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() { document.querySelector('.nav-links').classList.toggle('open'); });
+    window.addEventListener('scroll', function() { document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 80); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
