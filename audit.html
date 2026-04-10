@@ -399,12 +399,33 @@ async function runAudit() {
   }, 600);
 
   try {
-    const res = await fetch(`${AUDIT_API}?url=${encodeURIComponent(url)}`);
-    const data = await res.json();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    const res = await fetch(`${AUDIT_API}?url=${encodeURIComponent(url)}`, { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (!res.ok) {
+      clearInterval(stepInterval);
+      alert('Could not reach that URL. Please check it and try again.');
+      resetForm();
+      return;
+    }
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch(parseErr) {
+      clearInterval(stepInterval);
+      alert('Error processing the response. Please try a different URL.');
+      resetForm();
+      return;
+    }
+
     clearInterval(stepInterval);
 
     if (data.error) {
-      alert('Could not reach that URL. Please check it and try again.');
+      alert('Could not reach that URL: ' + data.error);
       resetForm();
       return;
     }
@@ -413,7 +434,11 @@ async function runAudit() {
     displayResults(url, checks);
   } catch(e) {
     clearInterval(stepInterval);
-    alert('Something went wrong. Please try again.');
+    if (e.name === 'AbortError') {
+      alert('The request timed out. The site may be too slow to audit.');
+    } else {
+      alert('Something went wrong: ' + e.message);
+    }
     resetForm();
   }
 }
