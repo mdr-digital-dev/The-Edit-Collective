@@ -1,0 +1,32 @@
+# The Edit Collective
+
+> Small business marketing agency based in Chicago. Website design, social media management, photography & video, and iOS app development.
+
+## About
+
+The Edit Collective is a full-service marketing agency for small businesses. We offer strategy, design, and content that connects — from a team as invested in your growth as you are. Our tagline: "The Edit Your Brand Has Been Waiting For."
+
+## Services
+
+- [Website Design & Development](/services/websites): Custom websites starting at $499. No templates. Mobile-first, SEO-ready, ongoing support.
+- [Social Media Management](/services/social-media): Content strategy, creation, and posting. Plans from $1,000/mo (Basic) to $2,500/mo (Growth).
+- [Photography & Video](/services/photo-video): Social shoots ($499), professional shoots ($799), full production ($1,199).
+- [App Development](/services/apps): Custom iOS apps. Loyalty apps ($2,999), fully custom apps (starting at $4,999).
+- [Free Website Audit](/audit): Instant SEO, mobile, speed, and security audit tool.
+
+## Contact
+
+- Website: https://the-edit-collective.vercel.app
+- Email: Theeditcollectivechi@gmail.com
+- Instagram: @theeditcollectivechi
+- Location: Chicago, IL
+
+## Portfolio
+
+We've built websites for Produce World, PowerTech Group, Opa Kitchen, Osteria Del Lago, Bob's Bagels, and the National Mah Jongg League.
+
+## Blog
+
+- Why Your Small Business Needs a Website in 2026
+- 5 Social Media Mistakes Small Businesses Make
+- How to Build a Brand People Actually Remember

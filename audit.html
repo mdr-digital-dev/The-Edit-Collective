@@ -587,6 +587,20 @@ function analyzeHtml(html, isHttps, loadTime, url) {
       : 'No structured data found. Adding schema markup helps Google display rich results (star ratings, hours, etc.) and improves click-through rates.'
   });
 
+  // 11. AI Discoverability (llms.txt)
+  const hasLlmsTxtLink = doc.querySelector('link[rel="llms-txt"]') || doc.querySelector('a[href*="llms.txt"]');
+  const htmlLower = html.toLowerCase();
+  const mentionsLlms = htmlLower.includes('llms.txt') || htmlLower.includes('llms-full.txt');
+  checks.push({
+    id: 'llms',
+    name: 'AI Discoverability (llms.txt)',
+    icon: '🤖',
+    status: mentionsLlms || hasLlmsTxtLink ? 'pass' : 'warn',
+    detail: mentionsLlms || hasLlmsTxtLink
+      ? 'llms.txt reference found. Your site is set up to be discoverable by AI assistants like ChatGPT and Claude.'
+      : 'No llms.txt found. Adding an llms.txt file helps AI assistants (ChatGPT, Claude, etc.) understand and recommend your business. This is becoming the new SEO for AI search.'
+  });
+
   return checks;
 }
 
