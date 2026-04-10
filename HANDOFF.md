@@ -126,7 +126,7 @@ The nav is consistent across all pages:
 - **Provider:** Formspree
 - **Form ID:** `xwpozwjy` (PLACEHOLDER — needs to be replaced with real Formspree ID)
 - **Fields:** Name, Email, Business Name, Service (dropdown), Budget Range (dropdown), Project Description
-- **Notification email:** fond-marina-4a@icloud.com (temporary — update when domain purchased)
+- **Notification email:** Theeditcollectivechi@gmail.com (temporary — update when domain purchased)
 - **Submission:** AJAX POST, shows success message inline
 
 ### Support Ticket Form (`/support`)
@@ -165,7 +165,7 @@ The nav is consistent across all pages:
 10. Structured Data (Schema/JSON-LD)
 
 ### Email Capture
-After results, users can "send the report" — triggers a mailto to `fond-marina-4a@icloud.com` with audit details.
+After results, users can "send the report" — triggers a mailto to `Theeditcollectivechi@gmail.com` with audit details.
 
 ---
 
@@ -242,7 +242,7 @@ Each post includes:
 
 ### Critical
 - [ ] **Replace Formspree form ID** — Create account at formspree.io, set notification email, swap `xwpozwjy` in contact.html and support.html
-- [ ] **Purchase domain** — Update email from fond-marina-4a@icloud.com to branded email
+- [ ] **Purchase domain** — Update email from Theeditcollectivechi@gmail.com to branded email
 - [ ] **Set up newsletter backend** — Connect blog newsletter forms to Mailchimp/ConvertKit
 - [ ] **Add LinkedIn URL** — Replace `#` placeholder in footer social links
 
@@ -292,7 +292,7 @@ git push
 | Vercel | Connected to GitHub repo, auto-deploys |
 | Formspree | Needs account setup — currently using placeholder ID |
 | Domain | Pending purchase |
-| Email | fond-marina-4a@icloud.com (temporary) |
+| Email | Theeditcollectivechi@gmail.com (temporary) |
 
 ---
 
@@ -300,4 +300,4 @@ git push
 
 **Michael Rodriguez** — MDR Digital
 - Instagram: @theeditcollectivechi
-- Email: fond-marina-4a@icloud.com (temporary)
+- Email: Theeditcollectivechi@gmail.com (temporary)
