@@ -400,16 +400,9 @@ async function runAudit() {
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
+    const timeout = setTimeout(() => controller.abort(), 20000);
     const res = await fetch(`${AUDIT_API}?url=${encodeURIComponent(url)}`, { signal: controller.signal });
     clearTimeout(timeout);
-
-    if (!res.ok) {
-      clearInterval(stepInterval);
-      alert('Could not reach that URL. Please check it and try again.');
-      resetForm();
-      return;
-    }
 
     const text = await res.text();
     let data;

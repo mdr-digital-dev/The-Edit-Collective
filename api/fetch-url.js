@@ -7,8 +7,8 @@ export default async function handler(req) {
 
   if (!target) {
     return new Response(JSON.stringify({ error: 'No URL provided' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' }
+      status: 200,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
     });
   }
 
@@ -19,10 +19,9 @@ export default async function handler(req) {
     const start = Date.now();
     const res = await fetch(finalUrl, {
       headers: {
-        'User-Agent': 'TEC-Audit-Bot/1.0 (website audit tool; +https://the-edit-collective.vercel.app/audit)'
+        'User-Agent': 'Mozilla/5.0 (compatible; TEC-Audit-Bot/1.0; +https://the-edit-collective.vercel.app/audit)'
       },
-      redirect: 'follow',
-      signal: AbortSignal.timeout(8000)
+      redirect: 'follow'
     });
 
     const loadTime = Date.now() - start;
@@ -44,7 +43,7 @@ export default async function handler(req) {
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
+      status: 200,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
